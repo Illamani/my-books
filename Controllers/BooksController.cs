@@ -35,5 +35,18 @@ namespace my_books.Controllers
             var singleBook = _booksService.GetBookById(id);
             return Ok(singleBook);
         }
+
+        [HttpPut("update-book-by-id/{id}")]
+        public IActionResult UpdateBookById(int id, [FromBody]BookVM book)
+        {
+            var updatedBook = _booksService.updateBookById(id, book);
+            return Ok(updatedBook); 
+        }
+        [HttpDelete("delete-book-id/{id}")]
+        public IActionResult deleteBookById(int id)
+        {
+            _booksService.deleteBookById(id);
+            return Ok();
+        }
     }
 }
