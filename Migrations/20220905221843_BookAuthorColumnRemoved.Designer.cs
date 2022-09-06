@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using my_books.Data.Models;
 
 namespace my_books.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220905221843_BookAuthorColumnRemoved")]
+    partial class BookAuthorColumnRemoved
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,19 +84,19 @@ namespace my_books.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("AuthorId")
+                    b.Property<int>("authorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("BookId")
+                    b.Property<int>("bookId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuthorId");
+                    b.HasIndex("authorId");
 
-                    b.HasIndex("BookId");
+                    b.HasIndex("bookId");
 
-                    b.ToTable("Books_Authors");
+                    b.ToTable("Book_Authors");
                 });
 
             modelBuilder.Entity("my_books.Data.Models.Publisher", b =>
@@ -127,13 +129,13 @@ namespace my_books.Migrations
                 {
                     b.HasOne("my_books.Data.Models.Author", "Author")
                         .WithMany("Book_Authors")
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("authorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("my_books.Data.Models.Book", "Book")
                         .WithMany("Book_Authors")
-                        .HasForeignKey("BookId")
+                        .HasForeignKey("bookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

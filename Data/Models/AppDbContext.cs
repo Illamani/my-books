@@ -13,16 +13,16 @@ namespace my_books.Data.Models
             modelbuilder.Entity<Book_Author>()
                 .HasOne(b => b.Book)
                 .WithMany(ba => ba.Book_Authors)
-                .HasForeignKey(bi => bi.bookId);
+                .HasForeignKey(bi => bi.BookId);
 
             modelbuilder.Entity<Book_Author>()
                 .HasOne(b => b.Author)
                 .WithMany(ba => ba.Book_Authors)
-                .HasForeignKey(bi => bi.authorId);
+                .HasForeignKey(bi => bi.AuthorId);
         }
         public DbSet<Book> Books { get; set; }
         public DbSet<Author> Authors { get; set; }
-        public DbSet<Book_Author> Book_Authors { get; set; }
+        public DbSet<Book_Author> Books_Authors { get; set; }
         public DbSet<Publisher> Publisher { get; set; }
     }
 }
